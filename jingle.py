@@ -8,10 +8,14 @@ from notes import Note
 def main():
     parser = argparse.ArgumentParser(description='Play a jingle')
     parser.add_argument('jingle', help='jingle file')
+    parser.add_argument('--speed', type=int,
+                        help='1-unit note speed in milliseconds')
 
     args = parser.parse_args()
-
     player = Note()
+
+    if args.speed:
+        player.set_speed(args.speed)
 
     with open(args.jingle) as jingle_file:
         ws = re.compile(r'[ \t]+')
