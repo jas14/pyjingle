@@ -25,7 +25,7 @@ class Note:
     }
 
     def __init__(self):
-        self.note = re.compile(r'([0-9]+)?([a-gA-Gr][#b]?)([1-9])?')
+        self.note = re.compile(r'([0-9\.]+)?([a-gA-Gr][#b]?)([1-9])?')
         self.tempo = 250
 
     def toHz(self, string):
@@ -45,9 +45,9 @@ class Note:
         note = self.note.match(note_str.strip())
         duration = note.group(1)
         if duration is None:
-            duration = 1
+            duration = 1.0
         else:
-            duration = int(duration)
+            duration = float(duration)
 
         pitch = note.group(2)
         pitch = pitch[0].upper() + pitch[1:]
