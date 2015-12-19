@@ -28,6 +28,7 @@ class Note:
         self.note = re.compile(r'([0-9\.]+)?([a-gA-Gr][#b]?)([1-9])?')
         self.speed = 250
         self.rate = 1.0
+        self.shift = 0
 
     def toHz(self, string):
         if string.upper() in self._notes:
@@ -43,6 +44,9 @@ class Note:
         if (rate <= 0):
             raise Exception("Invalid rate")
         self.rate = rate
+
+    def set_shift(self, shift):
+        self.shift = shift
 
     def play(self, note_str):
         low_pitches = ['A', 'A#', 'Bb', 'B']
@@ -69,6 +73,8 @@ class Note:
             octave = 0
         else:
             octave = int(octave) - (4 if pitch in low_pitches else 5)
+
+        octave += self.shift
 
         if pitch != 'R':
             freq = self._notes[pitch] * pow(2, octave)

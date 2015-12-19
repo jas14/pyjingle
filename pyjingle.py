@@ -10,12 +10,17 @@ def main():
     parser.add_argument('jingle', help='jingle file')
     parser.add_argument('--rate', type=float,
                         help='Factor by which to increase tempo')
+    parser.add_argument('--shift', type=int,
+                        help='Number of octaves to shift pitches')
 
     args = parser.parse_args()
     player = Note()
 
     if args.rate:
         player.set_rate(args.rate)
+
+    if args.shift:
+        player.set_shift(args.shift)
 
     line_no = 0
     with open(args.jingle) as jingle_file:

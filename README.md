@@ -3,9 +3,10 @@
 Pyjingle reads .jingle files and plays them using [beep](https://github.com/johnath/beep).
 
 ## Usage
-`./pyjingle.py [--rate RATE] jingle_file`
+`./pyjingle.py [--rate RATE] [--shift SHIFT] jingle_file`
 
 * `--rate RATE` specifies the factor by which to increase the tempo.
+* `--shift SHIFT` specifies the number of octaves to shift the jingle up. Pass in a negative number to shift down.
 
 ## Jingle Format
 .jingle files are made up of lines with either a _command_, a list of whitespace-separated _notes_, or a comment. Each note is formatted like so: `[speed]pitch[octave]`,
