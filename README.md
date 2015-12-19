@@ -5,7 +5,7 @@ Pyjingle reads .jingle files and plays them using [beep](https://github.com/john
 ## Usage
 `./pyjingle.py [--speed SPEED] jingle_file`
 
-* `--speed SPEED` specifies the duration of the unit note in milliseconds; that is, any note
+* `--speed SPEED` specifies the duration of the unit note in milliseconds
 
 ## Jingle Format
 .jingle files are made up of whitespace-separated _notes_. Each note is formatted like so: `[speed]pitch[octave]`,
