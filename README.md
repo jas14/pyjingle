@@ -17,4 +17,6 @@ where:
     * a rest `r` (in which case `octave` is ignored)
 * `octave` is an integer indicating the octave of the note. `A4` 440 Hz.
 
+To comment out a line in a jingle file, make its first character a `%`.
+
 See the `jingles` folder for examples.

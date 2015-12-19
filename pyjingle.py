@@ -20,7 +20,8 @@ def main():
     with open(args.jingle) as jingle_file:
         ws = re.compile(r'[ \t]+')
         for line in jingle_file.xreadlines():
-            if line.strip() == '':
+            line = line.strip()
+            if line == '' or line[0] == '%':
                 continue
 
             for note in ws.split(line.strip()):
