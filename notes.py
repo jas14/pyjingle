@@ -27,6 +27,7 @@ class Note:
     def __init__(self):
         self.note = re.compile(r'([0-9\.]+)?([a-gA-Gr][#b]?)([1-9])?')
         self.speed = 250
+        self.rate = 1.0
 
     def toHz(self, string):
         if string.upper() in self._notes:
@@ -34,7 +35,14 @@ class Note:
         return None
 
     def set_speed(self, millis):
+        if (millis <= 0):
+            raise Exception("Invalid speed")
         self.speed = millis
+
+    def set_rate(self, rate):
+        if (rate <= 0):
+            raise Exception("Invalid rate")
+        self.rate = rate
 
     def play(self, note_str):
         low_pitches = ['A', 'A#', 'Bb', 'B']
@@ -48,6 +56,8 @@ class Note:
             duration = 1.0
         else:
             duration = float(duration)
+
+        duration /= self.rate
 
         pitch = note.group(2)
         pitch = pitch[0].upper() + pitch[1:]

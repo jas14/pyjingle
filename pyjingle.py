@@ -8,23 +8,37 @@ from notes import Note
 def main():
     parser = argparse.ArgumentParser(description='Play a jingle')
     parser.add_argument('jingle', help='jingle file')
-    parser.add_argument('--speed', type=int,
-                        help='1-unit note speed in milliseconds')
+    parser.add_argument('--rate', type=float,
+                        help='Factor by which to increase tempo')
 
     args = parser.parse_args()
     player = Note()
 
-    if args.speed:
-        player.set_speed(args.speed)
+    if args.rate:
+        player.set_rate(args.rate)
 
+    line_no = 0
     with open(args.jingle) as jingle_file:
         ws = re.compile(r'[ \t]+')
         for line in jingle_file.xreadlines():
+            line_no += 1
             line = line.strip()
             if line == '' or line[0] == '%':
+                # ignore blank lines and comments
+                continue
+            elif line[0] == '*':
+                # setting line
+                key, val = line[1:].strip().split(' ')
+                if key == 'speed':
+                    # use suggested speed
+                    player.set_speed(int(val))
+                else:
+                    print ("Parse error: Unrecognized setting \"{0}\" "
+                           "on line {1}".format(key, line_no))
+                    return
                 continue
 
-            for note in ws.split(line.strip()):
+            for note in ws.split(line):
                 player.play(note)
 
 if __name__ == "__main__":
