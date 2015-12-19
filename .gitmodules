@@ -1,0 +1,3 @@
+[submodule "pybeep"]
+	path = pybeep
+	url = git://github.com/jas14/pybeep.git
